@@ -9,25 +9,9 @@ import UIKit
 import ClockSliderLibrary
 
 class ThumbnailView: UIView {
-    var underlyingThumbnailView: CrossPlatformThumbnailView?
+    var underlyingThumbnailView: CrossPlatformThumbnailView
     
-    init(_frame: CGRect,
-         _ringWidth: CGFloat,
-         _clockRadius: CGFloat,
-         _thumnailImage: UIImage? = nil,
-         _thumbnailColor: UIColor? = nil) {
-        super.init(frame: _frame)
-        self.isOpaque = false
-        
-        let thumnailImage: CGImage? = _thumnailImage?.cgImage
-        let thumbnailColor: CGColor? = _thumbnailColor?.cgColor
-        underlyingThumbnailView = CrossPlatformThumbnailView(_frame: _frame,
-                                                             _ringWidth: _ringWidth,
-                                                             _clockRadius: _clockRadius,
-                                                             _thumbnailImage: thumnailImage,
-                                                             _thumbnailColor: thumbnailColor)
-    }
-    
+    //MARK:- initialization
     override init(frame: CGRect) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -36,19 +20,39 @@ class ThumbnailView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setDrawableEndAngle(_ endAngle: CGFloat) {
-        underlyingThumbnailView?.drawableEndAngle = endAngle
-        self.setNeedsDisplay(self.bounds)
+    init(_frame: CGRect,
+         _ringWidth: CGFloat,
+         _clockRadius: CGFloat,
+         _underlyingThumbnailView: CrossPlatformThumbnailView,
+         _thumnailImage: UIImage? = nil,
+         _thumbnailColor: UIColor? = nil
+    ) {
+        let thumnailImage: CGImage? = _thumnailImage?.cgImage
+        let thumbnailColor: CGColor? = _thumbnailColor?.cgColor
+        underlyingThumbnailView = _underlyingThumbnailView
+        
+        super.init(frame: _frame)
+        underlyingThumbnailView.thumbnailImage = thumnailImage
+        underlyingThumbnailView.thumbnailColor = thumbnailColor
+        
+        // need to se the CocoaCocoaTouchViewInterface view delegate for the touch gestures to work
+        underlyingThumbnailView.viewModel.viewDelegate = self
     }
-    
+
+    //MARK:- Drawing    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
                 
-        guard let ctx = UIGraphicsGetCurrentContext(),
-              let underlyingView = self.underlyingThumbnailView else {
+        guard let ctx = UIGraphicsGetCurrentContext() else {
             return
         }
         
-        underlyingView.draw(rect, context: ctx)
+        self.underlyingThumbnailView.draw(rect, context: ctx)
+    }
+}
+
+extension ThumbnailView: CocoaCocoaTouchViewInterface {
+    public func touchPointIsInsideThisView(_ touchPoint: CGPoint) -> Bool {
+        return self.frame.contains(touchPoint)
     }
 }

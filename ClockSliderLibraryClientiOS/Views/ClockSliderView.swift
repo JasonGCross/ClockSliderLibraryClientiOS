@@ -9,37 +9,9 @@ import UIKit
 import ClockSliderLibrary
 
 class ClockSliderView: UIView {
-    var underlyingClockSliderView: CrossPlatformClockSliderView?
-    private var viewModel: ClockSliderViewModel
+    var underlyingClockSliderView: CrossPlatformClockSliderView
     
-    init(_frame: CGRect,
-         _ringWidth: CGFloat,
-         _sliderStartAngle: CGFloat,
-         _sliderEndAngle: CGFloat,
-         _clockType: ClockType,
-         _clockRotationCount: ClockRotationCount) {
-        
-        
-        
-        let screenScale = UIScreen.main.scale
-        viewModel = ClockSliderViewModel(
-            _frame: _frame,
-            _clockType: _clockType,
-            _ringWidth: _ringWidth,
-            _sliderStartAngle: _sliderStartAngle,
-            _sliderEndAngle: _sliderEndAngle,
-            _clockRotationCount: _clockRotationCount,
-            _screenScale: screenScale)
-        self.underlyingClockSliderView = CrossPlatformClockSliderView(
-            viewModel: viewModel)
-        
-        super.init(frame: _frame)
-        self.isOpaque = false // very important, otherwise a black rectangle obscures everything underneath
-        // alternatively, could set
-        // self.backgroundColor = UIColor.clear
-        // which would have the same effect
-    }
-    
+    //MARK:- Initialization
     override init(frame: CGRect) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -48,18 +20,32 @@ class ClockSliderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func originForThumbnail(minutes: Int) -> CGPoint {
-        return self.viewModel.originForThumbnail(minutes)
+    init(_frame: CGRect,
+         _ringWidth: CGFloat,
+         _sliderStartAngle: CGFloat,
+         _sliderEndAngle: CGFloat,
+         _clockType: ClockType,
+         _clockRotationCount: ClockRotationCount,
+         _underlyingClockSliderView: CrossPlatformClockSliderView) {
+        
+        underlyingClockSliderView = _underlyingClockSliderView
+        
+        super.init(frame: _frame)
     }
     
+    //MARK:- Helpers
+    func originForThumbnail(minutes: Int) -> CGPoint {
+        return self.underlyingClockSliderView.viewModel.originForThumbnail(minutes)
+    }
+    
+    //MARK:- Drawing
     override func draw(_ rect: CGRect) {
         super.draw(rect)
                 
-        guard let ctx = UIGraphicsGetCurrentContext(),
-              let underlyingView = self.underlyingClockSliderView else {
+        guard let ctx = UIGraphicsGetCurrentContext() else {
             return
         }
         
-        underlyingView.draw(rect, context: ctx)
+        self.underlyingClockSliderView.draw(rect, context: ctx)
     }
 }

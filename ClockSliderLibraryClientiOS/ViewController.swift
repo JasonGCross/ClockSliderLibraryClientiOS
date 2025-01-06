@@ -11,54 +11,52 @@ import ClockSliderLibrary
 class ViewController: UIViewController {
 
     @IBOutlet var customViewContainer: UIView!
-    var clockFaceView: ClockFaceView!
-    var clockSliderView: ClockSliderView!
-    var startKnobView: ThumbnailView!
-    var finishKnobView: ThumbnailView!
+    var timeRangeSliderControl: TimeRangeSliderControl!
     let ringWidth: CGFloat = 44.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let sliderStartAngle = 0.0
-        let sliderEndAngle = Double.pi/4
+        // change these 2 values to change the UI
+        let sliderStartAngle = 0 * Double.pi
+        let sliderEndAngle = (1.0) * Double.pi
+        let clockType = ClockType.twelveHourClock
 
-        self.clockFaceView = ClockFaceView(frame: self.customViewContainer.bounds)
-        self.clockSliderView = ClockSliderView(
-            _frame: self.customViewContainer.bounds,
-            _ringWidth: 44.0,
-            _sliderStartAngle: 0.0,
-            _sliderEndAngle: Double.pi/4,
-            _clockType: ClockType.twelveHourClock,
-            _clockRotationCount: ClockRotationCount.first)
-       
+        // all these are calculated based on above
+        let startMinutes = Int(clockType.minutesFromAngle(sliderStartAngle))
+        let endMinutes = Int(clockType.minutesFromAngle(sliderEndAngle))
+        let sliderStartTime =  TimeOfDayModel.timeModelFromMinutes(startMinutes)
+        let sliderEndTime = TimeOfDayModel.timeModelFromMinutes(endMinutes)
         
-        let diameter = CGFloat(fminf(Float(view.frame.size.width),
-                                     Float(view.frame.size.height)))
-        let clockRadius = diameter / 2.0
-        let startThumbnailOrigin = self.clockSliderView.originForThumbnail(minutes:0)
-        let startThumbnailFrame = CGRect(x: startThumbnailOrigin.x, y: startThumbnailOrigin.y, width: ringWidth, height: ringWidth)
+        timeRangeSliderControl = TimeRangeSliderControl(
+            _frame: customViewContainer.bounds,
+            _ringWidth: ringWidth,
+            _clockType: clockType,
+            _timeOfDay: TimeOfDayModel.now,
+            _sliderStartTime: sliderStartTime,
+            _sliderEndTime: sliderEndTime)
+        self.customViewContainer.addSubview(timeRangeSliderControl)
         
-        self.startKnobView = ThumbnailView.init(_frame: startThumbnailFrame,
-                                                _ringWidth: ringWidth,
-                                                _clockRadius: clockRadius,
-                                                _thumbnailColor: UIColor.red)
-        self.startKnobView.setDrawableEndAngle(sliderStartAngle)
+        timeRangeSliderControl.clockContainerBackgroundColor = .systemGray
+        timeRangeSliderControl.clockFaceBackgroundColor = .white
+        timeRangeSliderControl.clockFaceHandsColor = .black
+        timeRangeSliderControl.clockFaceTickMarkColor = .black
+        timeRangeSliderControl.clockFaceTextColor = .black
         
-        let finishThumbnailOrigin = self.clockSliderView.originForThumbnail(minutes:90)
-        let finishThumbnailFrame = CGRect(x: finishThumbnailOrigin.x, y: finishThumbnailOrigin.y, width: ringWidth, height: ringWidth)
-        self.finishKnobView = ThumbnailView.init(_frame: finishThumbnailFrame,
-                                                 _ringWidth: ringWidth,
-                                                 _clockRadius: clockRadius,
-                                                 _thumbnailColor: UIColor.green)
-        self.finishKnobView.setDrawableEndAngle(sliderEndAngle)
+        let startColor = UIColor(red: 0.2, green: 0.2, blue: 1.0, alpha: 1.0)
+        timeRangeSliderControl.firstDayGradientStartColor = startColor
+        timeRangeSliderControl.startThumbColor = startColor
         
-        self.customViewContainer.addSubview(self.clockFaceView)
-        self.customViewContainer.addSubview(self.clockSliderView)
-        self.customViewContainer.addSubview(self.startKnobView)
-        self.customViewContainer.addSubview(self.finishKnobView)
+        let finishColor = UIColor.systemPink
+        timeRangeSliderControl.firstDayGradientFinishColor = finishColor
+        timeRangeSliderControl.finishThumbColor = finishColor
+        
+        //timeRangeSliderControl.addAction(#selector(sliderValueChanged), for: .valueChanged)
     }
 
-
+    //MARK:- Actions
+    @IBAction func sliderValueChanged(sender: TimeRangeSliderControl) {
+        
+    }
 }
 

@@ -9,26 +9,34 @@ import UIKit
 import ClockSliderLibrary
 
 class ClockFaceView: UIView {
-    var underlyingClockFaceView: CrossPlatformClockFaceView?
+    var underlyingClockFaceView: CrossPlatformClockFaceView
     
+    //MARK: - initialization
     override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.underlyingClockFaceView = CrossPlatformClockFaceView(_frame: self.bounds, _ringWidth: 44.0)
+        fatalError("init(coder:) has not been implemented")
     }
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.underlyingClockFaceView = CrossPlatformClockFaceView(_frame: self.bounds, _ringWidth: 44.0)
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    init(_frame: CGRect,
+         _ringWidth: CGFloat,
+         _underlyingClockFaceView : CrossPlatformClockFaceView
+    ) {
+        self.underlyingClockFaceView = _underlyingClockFaceView
+        self.underlyingClockFaceView.ringWidth = _ringWidth
+        
+        super.init(frame: _frame)
     }
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
                 
-        guard let ctx = UIGraphicsGetCurrentContext(),
-              let underlyingView = self.underlyingClockFaceView else {
+        guard let ctx = UIGraphicsGetCurrentContext() else {
             return
         }
         
-        underlyingView.draw(rect, context: ctx)
+        self.underlyingClockFaceView.draw(rect, context: ctx)
     }
 }
