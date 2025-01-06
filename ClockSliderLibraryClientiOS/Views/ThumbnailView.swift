@@ -32,6 +32,8 @@ class ThumbnailView: UIView {
         underlyingThumbnailView = _underlyingThumbnailView
         
         super.init(frame: _frame)
+        self.backgroundColor = .clear
+        
         underlyingThumbnailView.thumbnailImage = thumnailImage
         underlyingThumbnailView.thumbnailColor = thumbnailColor
         

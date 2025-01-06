@@ -51,7 +51,7 @@ class ViewController: UIViewController {
         timeRangeSliderControl.firstDayGradientFinishColor = finishColor
         timeRangeSliderControl.finishThumbColor = finishColor
         
-        //timeRangeSliderControl.addAction(#selector(sliderValueChanged), for: .valueChanged)
+        timeRangeSliderControl.isUserInteractionEnabled = true
     }
 
     //MARK:- Actions

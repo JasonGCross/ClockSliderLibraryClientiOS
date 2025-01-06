@@ -29,8 +29,9 @@ class ClockSliderView: UIView {
          _underlyingClockSliderView: CrossPlatformClockSliderView) {
         
         underlyingClockSliderView = _underlyingClockSliderView
-        
         super.init(frame: _frame)
+        
+        self.backgroundColor = .clear
     }
     
     //MARK:- Helpers

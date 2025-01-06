@@ -296,18 +296,16 @@ class TimeRangeSliderControl: UIControl {
             let underlyingFinishKnobView = self.underlyingTimeRangeSliderControl!.finishKnobView!
          
             // the inner circle with the hands, ticks, and numbers
-            let clockFaceView = ClockFaceView(
+            self.clockFaceView = ClockFaceView(
                 _frame: _frame,
                 _ringWidth: _ringWidth,
                 _underlyingClockFaceView: underlyingClockFaceView
             )
-            self.layer.addSublayer(clockFaceView.layer)
-            self.clockFaceView = clockFaceView
         
             // the outer ring with a track for sliding
             let startAngle = self.underlyingTimeRangeSliderControl!.viewModel.getDrawableStartAngle()
             let finishAngle = self.underlyingTimeRangeSliderControl!.viewModel.getDrawableEndAngle()
-            let clockSliderView = ClockSliderView(
+            self.clockSliderView = ClockSliderView(
                 _frame: _frame,
                 _ringWidth: _ringWidth,
                 _sliderStartAngle: startAngle,
@@ -316,38 +314,41 @@ class TimeRangeSliderControl: UIControl {
                 _clockRotationCount: .first,
                 _underlyingClockSliderView: underlyingClockSliderView
             )
-            self.layer.addSublayer(clockSliderView.layer)
-            self.clockSliderView = clockSliderView
             
             // the sliders along the track
             let diameter = CGFloat(fminf(Float(frame.size.width),
                                          Float(frame.size.height)))
             let clockRadius = diameter / 2.0
-            let startThumbnailOrigin = clockSliderView.originForThumbnail(minutes:_sliderStartTime.totalMinutes)
+            let startThumbnailOrigin = clockSliderView!.originForThumbnail(minutes:_sliderStartTime.totalMinutes)
             let startThumbnailFrame = CGRect(x: startThumbnailOrigin.x, y: startThumbnailOrigin.y, width: _ringWidth, height: _ringWidth)
-            let startKnobView = ThumbnailView(
+            self.startKnobView = ThumbnailView(
                 _frame: startThumbnailFrame,
                 _ringWidth: _ringWidth,
                 _clockRadius: clockRadius,
                 _underlyingThumbnailView: underlyingStartKnobView,
                 _thumbnailColor: UIColor.red
             )
-            
-            self.layer.addSublayer(startKnobView.layer)
-            self.startKnobView = startKnobView
         
-            let finishThumbnailOrigin = clockSliderView.originForThumbnail(minutes:_sliderEndTime.totalMinutes)
+            let finishThumbnailOrigin = clockSliderView!.originForThumbnail(minutes:_sliderEndTime.totalMinutes)
             let finishThumbnailFrame = CGRect(x: finishThumbnailOrigin.x, y: finishThumbnailOrigin.y, width: _ringWidth, height: _ringWidth)
-            let finishKnobView = ThumbnailView(
+            self.finishKnobView = ThumbnailView(
                 _frame: finishThumbnailFrame,
                 _ringWidth: _ringWidth,
                 _clockRadius: clockRadius,
                 _underlyingThumbnailView: underlyingFinishKnobView,
                 _thumbnailColor: UIColor.green
             )
-            self.layer.addSublayer(finishKnobView.layer)
-            self.finishKnobView = finishKnobView
             
+            self.layer.addSublayer(clockFaceView!.layer)
+            self.layer.addSublayer(clockSliderView!.layer)
+            self.layer.addSublayer(startKnobView!.layer)
+            self.layer.addSublayer(finishKnobView!.layer)
+            
+            // must allow this control to intercept all touches, and not the subviews
+            self.clockFaceView?.isUserInteractionEnabled = false
+            self.clockSliderView?.isUserInteractionEnabled = false
+            self.startKnobView?.isUserInteractionEnabled = false
+            self.finishKnobView?.isUserInteractionEnabled = false
         }
     
     //MARK: - helpers
