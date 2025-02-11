@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F6618F9C2D5B45C000E70794 /* ClockSliderLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = F6618F9B2D5B45C000E70794 /* ClockSliderLibrary */; };
 		F6FDDA652CCEC39400CC9595 /* ClockSliderLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = F6FDDA642CCEC39400CC9595 /* ClockSliderLibrary */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6618F9C2D5B45C000E70794 /* ClockSliderLibrary in Frameworks */,
 				F6FDDA652CCEC39400CC9595 /* ClockSliderLibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,6 +86,7 @@
 			name = ClockSliderLibraryClientiOS;
 			packageProductDependencies = (
 				F6FDDA642CCEC39400CC9595 /* ClockSliderLibrary */,
+				F6618F9B2D5B45C000E70794 /* ClockSliderLibrary */,
 			);
 			productName = ClockSliderLibraryClientiOS;
 			productReference = F6FDDA352CCEC2A200CC9595 /* ClockSliderLibraryClientiOS.app */;
@@ -114,7 +117,7 @@
 			mainGroup = F6FDDA2C2CCEC2A200CC9595;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				F6FDDA632CCEC39400CC9595 /* XCLocalSwiftPackageReference "../ClockSliderLibrary2" */,
+				F6618F9A2D5B45C000E70794 /* XCLocalSwiftPackageReference "../ClockSliderLibrary" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F6FDDA362CCEC2A200CC9595 /* Products */;
@@ -346,13 +349,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		F6FDDA632CCEC39400CC9595 /* XCLocalSwiftPackageReference "../ClockSliderLibrary2" */ = {
+		F6618F9A2D5B45C000E70794 /* XCLocalSwiftPackageReference "../ClockSliderLibrary" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = ../ClockSliderLibrary2;
+			relativePath = ../ClockSliderLibrary;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F6618F9B2D5B45C000E70794 /* ClockSliderLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ClockSliderLibrary;
+		};
 		F6FDDA642CCEC39400CC9595 /* ClockSliderLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ClockSliderLibrary;
