@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+<<<<<<< HEAD
 		F60629F52D5B301300C7D39E /* ClockSliderLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = F60629F42D5B301300C7D39E /* ClockSliderLibrary */; };
+=======
+		F6406E5D2D5B436100790146 /* ClockSliderLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = F6406E5C2D5B436100790146 /* ClockSliderLibrary */; };
+>>>>>>> temp1
 		F6FDDA652CCEC39400CC9595 /* ClockSliderLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = F6FDDA642CCEC39400CC9595 /* ClockSliderLibrary */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +45,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
 				F60629F52D5B301300C7D39E /* ClockSliderLibrary in Frameworks */,
+=======
+				F6406E5D2D5B436100790146 /* ClockSliderLibrary in Frameworks */,
+>>>>>>> temp1
 				F6FDDA652CCEC39400CC9595 /* ClockSliderLibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,7 +94,11 @@
 			name = ClockSliderLibraryClientiOS;
 			packageProductDependencies = (
 				F6FDDA642CCEC39400CC9595 /* ClockSliderLibrary */,
+<<<<<<< HEAD
 				F60629F42D5B301300C7D39E /* ClockSliderLibrary */,
+=======
+				F6406E5C2D5B436100790146 /* ClockSliderLibrary */,
+>>>>>>> temp1
 			);
 			productName = ClockSliderLibraryClientiOS;
 			productReference = F6FDDA352CCEC2A200CC9595 /* ClockSliderLibraryClientiOS.app */;
@@ -117,7 +129,11 @@
 			mainGroup = F6FDDA2C2CCEC2A200CC9595;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+<<<<<<< HEAD
 				F60629F32D5B301300C7D39E /* XCLocalSwiftPackageReference "../ClockSliderLibrary" */,
+=======
+				F6406E5B2D5B436100790146 /* XCLocalSwiftPackageReference "../ClockSliderLibrary" */,
+>>>>>>> temp1
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F6FDDA362CCEC2A200CC9595 /* Products */;
@@ -349,14 +365,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+<<<<<<< HEAD
 		F60629F32D5B301300C7D39E /* XCLocalSwiftPackageReference "../ClockSliderLibrary" */ = {
+=======
+		F6406E5B2D5B436100790146 /* XCLocalSwiftPackageReference "../ClockSliderLibrary" */ = {
+>>>>>>> temp1
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../ClockSliderLibrary;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+<<<<<<< HEAD
 		F60629F42D5B301300C7D39E /* ClockSliderLibrary */ = {
+=======
+		F6406E5C2D5B436100790146 /* ClockSliderLibrary */ = {
+>>>>>>> temp1
 			isa = XCSwiftPackageProductDependency;
 			productName = ClockSliderLibrary;
 		};
